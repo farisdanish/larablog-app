@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    @auth
+    <title>Home - {{ Auth::user()->name }}</title>
+    @else
     <title>Login/Registration</title>
+    @endauth
 </head>
 <body>
     @auth
@@ -42,6 +46,12 @@
         <div style="background-color: gray; padding: 10px; margin: 10px;">
             <h3>{{$post['title']}}</h3>
             {{$post['content']}}
+            <p><a href="/edit_post/{{$post->id}}">Edit</a></p>
+            <form action="/delete_post/{{$post->id}}" method="post">
+                @csrf
+                @method('DELETE')
+                <button>Delete</button>
+            </form>
         </div>
         @endforeach
     </div>

@@ -21,4 +21,8 @@ class PostController extends Controller
         Post::create($incomingFields);
         return redirect()->route("user.home")->with("success","Post added successfuly");
     }
+
+    public function showEditScreen(Post $post){
+        return view('edit_post', ['post'=> $post]);
+    }
 }

@@ -31,3 +31,4 @@ Route::post('/login', [UserController::class,'login'])->name('user.login');
 Route::post('/logout', [UserController::class,'logout'])->name('user.logout');
 
 Route::post('/create_post', [PostController::class,'create_post'])->name('post.create_post');
+Route::get('/edit_post/{post}', [PostController::class, 'showEditScreen'])->name('post.edit');
