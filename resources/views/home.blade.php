@@ -91,6 +91,7 @@
         </form>
         <br/>
     </div>
+    <br/>
     <div style="border: 3px solid black">
         <h2>All Posts</h2>
         @foreach($allposts as $apost)
