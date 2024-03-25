@@ -23,14 +23,19 @@ Route::get('/', function () {
     if (auth()->check()){
         $posts = auth()->user()->usersCoolPosts()->latest()->get();
     }
-    return view('home',['posts'=> $posts]);
+    $allposts = Post::all()->sortDesc();
+    return view('home',['posts'=> $posts, 'allposts'=> $allposts]);
 })->name('user.home');
 
-Route::post('/register', [UserController::class,'register'])->name('user.register');
-Route::post('/login', [UserController::class,'login'])->name('user.login');
-Route::post('/logout', [UserController::class,'logout'])->name('user.logout');
+Route::controller(UserController::class)->group(function(){
+    Route::post('/register', 'register')->name('user.register');
+    Route::post('/login', 'login')->name('user.login');
+    Route::post('/logout', 'logout')->name('user.logout');
+});
 
-Route::post('/create_post', [PostController::class,'create_post'])->name('post.create_post');
-Route::get('/edit_post/{post}', [PostController::class, 'showEditScreen'])->name('post.show_edit_screen');
-Route::put('/edit_post/{post}', [PostController::class, 'editPost'])->name('post.edit');
-Route::delete('/delete_post/{post}', [PostController::class, 'deletePost'])->name('post.delete');
+Route::controller(PostController::class)->group(function(){
+    Route::post('/create_post', 'create_post')->name('post.create_post');
+    Route::get('/edit_post/{post}', 'showEditScreen')->name('post.show_edit_screen');
+    Route::put('/edit_post/{post}', 'editPost')->name('post.edit');
+    Route::delete('/delete_post/{post}', 'deletePost')->name('post.delete'); 
+});

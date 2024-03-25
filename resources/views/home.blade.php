@@ -41,7 +41,7 @@
     </div>
     <br/>
     <div style="border: 3px solid black">
-        <h2>All Posts</h2>
+        <h2>Your Posts</h2>
         @foreach($posts as $post)
         <div style="background-color: gray; padding: 10px; margin: 10px;">
             <h3>{{$post['title']}}</h3>
@@ -90,6 +90,15 @@
             <button type="submit">Login</button>
         </form>
         <br/>
+    </div>
+    <div style="border: 3px solid black">
+        <h2>All Posts</h2>
+        @foreach($allposts as $apost)
+        <div style="background-color: gray; padding: 10px; margin: 10px;">
+            <h3>{{$apost['title']}}</h3>
+            {{$apost['content']}}
+        </div>
+        @endforeach
     </div>
     @endauth
 </body>
