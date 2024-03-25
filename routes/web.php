@@ -31,4 +31,6 @@ Route::post('/login', [UserController::class,'login'])->name('user.login');
 Route::post('/logout', [UserController::class,'logout'])->name('user.logout');
 
 Route::post('/create_post', [PostController::class,'create_post'])->name('post.create_post');
-Route::get('/edit_post/{post}', [PostController::class, 'showEditScreen'])->name('post.edit');
+Route::get('/edit_post/{post}', [PostController::class, 'showEditScreen'])->name('post.show_edit_screen');
+Route::put('/edit_post/{post}', [PostController::class, 'editPost'])->name('post.edit');
+Route::delete('/delete_post/{post}', [PostController::class, 'deletePost'])->name('post.delete');

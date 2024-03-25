@@ -10,6 +10,9 @@
     <form action="/edit_post/{{$post->id}}" method="post"   >
         @csrf
         @method('put')
+        <input type="text" name="title" value="{{$post->title}}">
+        <textarea name="content">{{$post->content}}</textarea>
+        <button>Save Changes</button>
     </form>
 </body>
 </html>
