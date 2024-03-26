@@ -27,6 +27,16 @@ Route::get('/', function () {
     return view('home',['posts'=> $posts, 'allposts'=> $allposts]);
 })->name('user.home');
 
+Route::get('/login-page', function () {
+    $allposts = Post::all()->sortDesc();
+    return view('login');
+})->name('user.login_page');
+
+Route::get('/registration-page', function () {
+    $allposts = Post::all()->sortDesc();
+    return view('registration');
+})->name('user.register_page');
+
 Route::controller(UserController::class)->group(function(){
     Route::post('/register', 'register')->name('user.register');
     Route::post('/login', 'login')->name('user.login');

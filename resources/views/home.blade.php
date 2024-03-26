@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+@extends('layout')
+@section('title')
     @auth
-    <title>Home - {{ Auth::user()->name }}</title>
+    Home - {{ Auth::user()->name }}
     @else
-    <title>Login/Registration</title>
+    Login/Registration
     @endauth
-</head>
-<body>
+@endsection
+@section('body-content')
     @auth
     <!--If user is logged in, it will display this-->
     <h1>You are logged in</h1>
@@ -18,6 +14,10 @@
         @If(session()->has('success'))
             <div>
                 {{session('success')}}
+            </div>
+        @elseif(session()->has('error'))
+            <div>
+                {{session('error')}}
             </div>
         @endif
     </div>
@@ -57,7 +57,9 @@
     </div>
     @else
     <!--Else, it will display this-->
-    <div style="border: 3px solid black">
+    <button id="RegisterButton" class="float-left submit-button" >Register</button>
+    <button id="LoginButton" class="float-left submit-button" >Login</button>
+    <!--<div style="border: 3px solid black">
         <h2>Register</h2>
         <div>
             @If(session()->has('success'))
@@ -79,9 +81,8 @@
             <button type="submit">Register</button>
         </form>
         </br>
-    </div>
-    <br/>
-    <div style="border: 3px solid black">
+    </div>-->
+    <!--<div style="border: 3px solid black">
         <h2>Login</h2>
         <form action="{{route('user.login')}}" method="post">
             @csrf
@@ -90,9 +91,9 @@
             <button type="submit">Login</button>
         </form>
         <br/>
-    </div>
+    </div>-->
     <br/>
-    <div style="border: 3px solid black">
+    <div class="container">
         <h2>All Posts</h2>
         @foreach($allposts as $apost)
         <div style="background-color: gray; padding: 10px; margin: 10px;">
@@ -102,5 +103,14 @@
         @endforeach
     </div>
     @endauth
-</body>
-</html>
+    @section('scripts')
+    <script type="text/javascript">
+        document.getElementById("LoginButton").onclick = function () {
+            location.href = "{{route('user.login_page')}}";
+        };
+        document.getElementById("RegisterButton").onclick = function () {
+            location.href = "{{route('user.register_page')}}";
+        };
+    </script>
+    @endsection
+@endsection

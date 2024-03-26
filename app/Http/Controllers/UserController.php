@@ -29,7 +29,7 @@ class UserController extends Controller
 
     public function register(Request $request){
         $incomingFields = $request->validate([
-            'name'=> ['required','min:3','max:10'],
+            'name'=> ['required','min:3','max:50'],
             'email'=> ['required','email', Rule::unique('users','email')],
             'password'=> ['required','min:8','max:200'],
             'confirm_password'=>['required','min:8','max:200'],
@@ -48,10 +48,9 @@ class UserController extends Controller
             $newUser['password'] = bcrypt($newUser['password']);
             $user = User::create($newUser);
             auth()->login($user);
-
             return redirect('/')->with('success','Welcome! You were registered and logged in!');
         }else{
-            return redirect('/')->with('error','Registration unsuccessful, please try again.');
+            return redirect('/registration-page')->with('error','Registration unsuccessful, please try again.');
         }
     }
 }
